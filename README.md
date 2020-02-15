@@ -13,7 +13,7 @@ Your app will store every burger in a database, whether devoured or not.
 
 
 check out this link to see how the burger app works
-https://youtu.be/msvdn95x9OM
+
 
 this application is deployed on heroku at 
 .....
