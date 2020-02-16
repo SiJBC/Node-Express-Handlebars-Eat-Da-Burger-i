@@ -1,21 +1,42 @@
 var express = require("express")
 var router = express.Router();
 
-var urger = require("../models/burger.js")
+var burger = require("../models/burger.js")
 
-router.get()
-{
-    burger.all()
-}
+router.get("/", function (req, res) {
+    burger.all(function (data) {
+        var burgerObject = {
+            burgers: data
+        };
+        console.log(burgerObject)
+        res.render("index", burgerObject)
+    })
+})
 
-router.post()
-{
-    burger.create()
-}
+router.post("/api/burgers", function (req, res) {
+    burger.create("name", "devour", [req.body.name, req.body.devour], function (result) {
+        res.json({ id: result.insertId })
+    })
+})
 
-router.put()
-{
-    burger.update()
-}
+router.put("api/burgers/:id", function (req, res){
+    var condition = "id" + req.params.id;
+
+    console.log("condition", condition);
+
+    burger.update(
+        {
+            devour: req.body.devour
+        },
+            condition, 
+            function(result){
+                if (result.changedRows === 0) {
+                    return res.status(404).end()
+                }
+                res.status(200).end()
+            }
+    )
+})
+
 
 module.exports = router;
