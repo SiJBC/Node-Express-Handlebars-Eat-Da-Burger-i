@@ -2,13 +2,20 @@ $(document).ready(function() {
 
   // devour button
   $(".devourBtn").on("click", function(event) {
-
+event.preventDefault();
       // get ID of burger
       const id = $(this).data("id");
+      const burgerDevoured = $(this).data("newdevour");
+
+      var burgerIsDevoured = {
+          devour: burgerDevoured
+      } 
 
       // Send the PUT request.
       $.ajax("/api/burger/" + id, {
-          type: "PUT"
+          type: "PUT",
+          data: burgerIsDevoured
+        //   data:devour
       }).then(() => {
               // Reload the page to get the updated list
               location.reload();
