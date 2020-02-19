@@ -5,10 +5,8 @@ $(document).ready(function() {
 event.preventDefault();
       // get ID of burger
       const id = $(this).data("id");
-      const burgerDevoured = $(this).data("newdevour");
-
       var burgerIsDevoured = {
-          devour: burgerDevoured
+          devour: 1
       } 
 
       // Send the PUT request.
@@ -47,7 +45,10 @@ event.preventDefault();
       event.preventDefault();
 
       // Create object for POST request
-      let burgerName = { name: $("#burgerName").val().trim()};                               
+      let burgerName = { 
+          name: $("#burgerName").val().trim(), 
+            devour: $(".data-newdevour").val()
+        };                               
 
       // Send the POST request.
       $.ajax("/api/burger", {
